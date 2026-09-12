@@ -1,35 +1,203 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>Currie Star Results</title>
+<meta charset="utf-8">
+<title>Currie Star 2017s</title>
+
 <style>
+
 body{
-font-family:Arial;
-max-width:700px;
-margin:auto;
-padding:20px;
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#0b3d0b;
+    color:white;
 }
-.match{
-border:1px solid #ddd;
-padding:10px;
-margin:10px 0;
-border-radius:8px;
+
+header{
+    background:url("https://images.unsplash.com/photo-1552667466-07770ae110d0?w=1200") center/cover;
+    padding:80px 20px;
+    text-align:center;
 }
+
+header h1{
+    font-size:48px;
+    margin:0;
+}
+
+nav{
+    background:#111;
+    padding:15px;
+    text-align:center;
+}
+
+nav a{
+    color:white;
+    margin:20px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+section{
+    padding:20px;
+}
+
+.card{
+    background:#1d5a1d;
+    border-radius:12px;
+    padding:20px;
+    margin-bottom:20px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:15px;
+}
+
+th{
+    background:#222;
+}
+
+th,td{
+    padding:12px;
+    border:1px solid #444;
+}
+
+.gold{
+    color:gold;
+}
+
 </style>
 </head>
+
 <body>
 
-<h1>⚽ Currie Star Results</h1>
+<header>
+    <h1>⚽ CURRIE STAR 2017s</h1>
+    <p>Season 2</p>
+</header>
 
-<div class="match">
-<h3>Currie Star 4-2 Spartans</h3>
-<p>7 September 2026</p>
+<nav>
+    #fixturesFixtures</a>
+    #playersPlayers</a>
+    #statsStats</a>
+    #leadersLeaders</a>
+</nav>
+
+<section>
+
+<div class="card">
+<h2>Season Overview</h2>
+
+<p>Games: 12</p>
+<p>Wins: 8</p>
+<p>Draws: 2</p>
+<p>Losses: 2</p>
+
 </div>
 
-<div class="match">
-<h3>Currie Star 3-1 Hutchison Vale</h3>
-<p>14 September 2026</p>
+<div id="fixtures" class="card">
+
+<h2>Fixtures & Results</h2>
+
+<table>
+
+<tr>
+<th>Date</th>
+<th>Opponent</th>
+<th>Result</th>
+<th>Captain</th>
+<th>Scorers</th>
+</tr>
+
+<tr>
+<td>01/09/26</td>
+<td>Spartans</td>
+<td>4-2 W</td>
+<td>Jack</td>
+<td>Jack (2), Sam, Lewis</td>
+</tr>
+
+<tr>
+<td>07/09/26</td>
+<td>Tynecastle</td>
+<td>2-1 W</td>
+<td>Sam</td>
+<td>Sam, Harry</td>
+</tr>
+
+</table>
+
 </div>
+
+<div id="players" class="card">
+
+<h2>Squad</h2>
+
+<table>
+
+<tr>
+<th>Player</th>
+<th>Appearances</th>
+<th>Goals</th>
+<th>Captaincies</th>
+</tr>
+
+<tr>
+<td>Jack</td>
+<td>12</td>
+<td>14</td>
+<td>3</td>
+</tr>
+
+<tr>
+<td>Sam</td>
+<td>11</td>
+<td>9</td>
+<td>4</td>
+</tr>
+
+<tr>
+<td>Harry</td>
+<td>10</td>
+<td>5</td>
+<td>0</td>
+</tr>
+
+</table>
+
+</div>
+
+<div id="stats" class="card">
+
+<h2>Season Statistics</h2>
+
+<p>Goals Scored: 42</p>
+<p>Goals Conceded: 17</p>
+<p>Goal Difference: +25</p>
+
+</div>
+
+<div id="leaders" class="card">
+
+<h2>🏆 Team Leaders</h2>
+
+<p class="gold">
+Top Scorer: Jack (14)
+</p>
+
+<p class="gold">
+Most Appearances: Jack (12)
+</p>
+
+<p class="gold">
+Most Captaincies: Sam (4)
+</p>
+
+</div>
+
+</section>
 
 </body>
 </html>
