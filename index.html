@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html>
-<head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Currie Star 2017s</title>
 
-<style>
+
+
+Currie Star 2017s
+
+
 
 body{
 background:#083b08;
@@ -40,21 +39,33 @@ margin:15px 0;
 border-radius:10px;
 }
 
-input,select{
+input,select,textarea{
 width:100%;
 padding:10px;
 margin:5px 0;
 border-radius:8px;
 border:none;
+box-sizing:border-box;
 }
 
 button{
-padding:12px;
+padding:10px;
 background:gold;
 border:none;
 border-radius:8px;
 font-weight:bold;
 cursor:pointer;
+margin:2px;
+}
+
+.deleteBtn{
+background:red;
+color:white;
+}
+
+.editBtn{
+background:#2196f3;
+color:white;
 }
 
 table{
@@ -81,99 +92,82 @@ gap:5px;
 font-size:28px;
 }
 
-</style>
 
-</head>
 
-<body>
 
-<header>
 
-<h1>⚽ Currie Star 2017s</h1>
 
-<h3>Season 2</h3>
 
-</header>
 
-<div class="container">
+⚽ Currie Star 2017s
+Season 2
 
-<div class="card">
 
-<h2>Add Match</h2>
 
-<input id="date" type="date">
 
-<input id="opponent" placeholder="Opponent">
 
-<select id="venue">
-<option>Home</option>
-<option>Away</option>
-</select>
 
-<input id="goalsFor" type="number" placeholder="Goals For">
+Add / Edit Match
 
-<input id="goalsAgainst" type="number" placeholder="Goals Against">
 
-<select id="captain"></select>
 
-<h3>Players Who Played</h3>
 
-<div id="playerChecks" class="player-box"></div>
 
-<h3>Scorers</h3>
 
-<textarea
-id="scorers"
-style="width:100%;height:100px;"
-placeholder="Example:
+Home
+Away
 
-Finn, Finn, Finn
-Freddy, Freddy
-Luke
-">
-</textarea>
 
-<br><br>
 
-<button onclick="saveMatch()">
-Save Match
-</button>
 
-</div>
 
-<div class="card">
-<h2>📊 Season Summary</h2>
 
-<div id="summary"></div>
-</div>
 
-<div class="card">
-<h2>🔥 Form Guide</h2>
 
-<div class="form" id="formGuide"></div>
-</div>
+Players Who Played
 
-<div class="card">
-<h2>🏆 Top Scorers</h2>
 
-<div id="topScorers"></div>
-</div>
 
-<div class="card">
-<h2>👥 Squad Stats</h2>
+Scorers
 
-<div id="playerStats"></div>
-</div>
 
-<div class="card">
-<h2>📅 Match History</h2>
 
-<div id="matches"></div>
-</div>
+<ms-copilot-line-break>
 
-</div>
 
-<script>
+💾 Save Match
+
+
+
+
+
+📊 Season Summary
+
+
+
+
+🔥 Form Guide
+
+
+
+
+🏆 Top Scorers
+
+
+
+
+👥 Squad Statistics
+
+
+
+
+📅 Match History
+
+
+
+
+
+
 
 const players = [
 "Jamie",
@@ -194,6 +188,7 @@ JSON.parse(
 localStorage.getItem("currieMatches")
 ) || [];
 
+let editingIndex = -1;
 
 function setupPlayers(){
 
@@ -209,15 +204,29 @@ captain.innerHTML +=
 `<option>${player}</option>`;
 
 area.innerHTML += `
-<label>
-<input
-type="checkbox"
-value="${player}">
+
+
 ${player}
-</label>
+
 `;
 
 });
+
+}
+
+function clearForm(){
+
+document.getElementById("date").value="";
+document.getElementById("opponent").value="";
+document.getElementById("goalsFor").value="";
+document.getElementById("goalsAgainst").value="";
+document.getElementById("scorers").value="";
+
+document
+.querySelectorAll("#playerChecks input")
+.forEach(box=>box.checked=false);
+
+editingIndex = -1;
 
 }
 
@@ -238,9 +247,10 @@ document
 .getElementById("scorers")
 .value
 .split("\n")
-.filter(x=>x.trim()!="");
+.map(x=>x.trim())
+.filter(x=>x!="");
 
-matches.push({
+const matchData = {
 
 date:
 document.getElementById("date").value,
@@ -270,7 +280,85 @@ played,
 scorers:
 scorers
 
+};
+
+if(editingIndex >= 0){
+
+matches[editingIndex] = matchData;
+
+alert("✅ Match Updated");
+
+}else{
+
+matches.push(matchData);
+
+alert("⚽ Match Saved");
+
+}
+
+localStorage.setItem(
+"currieMatches",
+JSON.stringify(matches)
+);
+
+clearForm();
+
+render();
+
+}
+
+function editMatch(index){
+
+const match = matches[index];
+
+editingIndex = index;
+
+document.getElementById("date").value =
+match.date;
+
+document.getElementById("opponent").value =
+match.opponent;
+
+document.getElementById("venue").value =
+match.venue;
+
+document.getElementById("goalsFor").value =
+match.goalsFor;
+
+document.getElementById("goalsAgainst").value =
+match.goalsAgainst;
+
+document.getElementById("captain").value =
+match.captain;
+
+document.getElementById("scorers").value =
+match.scorers.join("\n");
+
+document
+.querySelectorAll("#playerChecks input")
+.forEach(box=>{
+
+box.checked =
+match.players.includes(box.value);
+
 });
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+function deleteMatch(index){
+
+if(!confirm(
+"Delete this match?"
+)){
+return;
+}
+
+matches.splice(index,1);
 
 localStorage.setItem(
 "currieMatches",
@@ -278,8 +366,6 @@ JSON.stringify(matches)
 );
 
 render();
-
-alert("⚽ Match Saved");
 
 }
 
@@ -297,153 +383,32 @@ const goals={};
 const captaincies={};
 
 players.forEach(player=>{
+
 appearances[player]=0;
 goals[player]=0;
 captaincies[player]=0;
+
 });
 
 let form="";
 
 matches.forEach(match=>{
 
-goalsFor+=match.goalsFor;
-goalsAgainst+=match.goalsAgainst;
+goalsFor += match.goalsFor;
+goalsAgainst += match.goalsAgainst;
 
-if(match.goalsFor>match.goalsAgainst){
+if(match.goalsFor > match.goalsAgainst){
+
 wins++;
-form+="🟢 ";
+form += "🟢 ";
+
 }
-else if(match.goalsFor==match.goalsAgainst){
+else if(match.goalsFor === match.goalsAgainst){
+
 draws++;
-form+="🟡 ";
+form += "🟡 ";
+
 }
 else{
-losses++;
-form+="🔴 ";
-}
 
-captaincies[match.captain]++;
-
-match.players.forEach(player=>{
-appearances[player]++;
-});
-
-match.scorers.forEach(player=>{
-if(goals[player]!=undefined){
-goals[player]++;
-}
-});
-
-});
-
-document.getElementById("summary")
-.innerHTML=`
-<p>Games: ${matches.length}</p>
-<p>Wins: ${wins}</p>
-<p>Draws: ${draws}</p>
-<p>Losses: ${losses}</p>
-<p>Goals For: ${goalsFor}</p>
-<p>Goals Against: ${goalsAgainst}</p>
-`;
-
-document.getElementById("formGuide")
-.innerHTML=form;
-
-let scorerHTML="<table>";
-scorerHTML+=`
-<tr>
-<th>Player</th>
-<th>Goals</th>
-</tr>
-`;
-
-Object.entries(goals)
-
-.sort((a,b)=>b[1]-a[1])
-
-.forEach(row=>{
-
-scorerHTML+=`
-<tr>
-<td>${row[0]}</td>
-<td>${row[1]}</td>
-</tr>
-`;
-
-});
-
-scorerHTML+="</table>";
-
-document.getElementById("topScorers")
-.innerHTML=scorerHTML;
-
-let squadHTML="<table>";
-
-squadHTML+=`
-<tr>
-<th>Player</th>
-<th>Apps</th>
-<th>Goals</th>
-<th>Captaincies</th>
-</tr>
-`;
-
-players.forEach(player=>{
-
-squadHTML+=`
-<tr>
-<td>${player}</td>
-<td>${appearances[player]}</td>
-<td>${goals[player]}</td>
-<td>${captaincies[player]}</td>
-</tr>
-`;
-
-});
-
-squadHTML+="</table>";
-
-document.getElementById("playerStats")
-.innerHTML=squadHTML;
-
-let matchHTML="<table>";
-
-matchHTML+=`
-<tr>
-<th>Date</th>
-<th>Opponent</th>
-<th>Score</th>
-<th>Captain</th>
-</tr>
-`;
-
-matches
-.slice()
-.reverse()
-.forEach(match=>{
-
-matchHTML+=`
-<tr>
-<td>${match.date}</td>
-<td>${match.opponent}</td>
-<td>${match.goalsFor}-${match.goalsAgainst}</td>
-<td>${match.captain}</td>
-</tr>
-`;
-
-});
-
-matchHTML+="</table>";
-
-document.getElementById("matches")
-.innerHTML=matchHTML;
-
-}
-
-setupPlayers();
-render();
-
-</script>
-
-</body>
-</html>
+losses
