@@ -1,105 +1,183 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<title>Currie Star 2017s</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Currie Star 2017s - Season 2</title>
 
 <style>
 
 body{
     margin:0;
-    font-family:Arial, sans-serif;
+    font-family:Arial,sans-serif;
     background:#0b3d0b;
     color:white;
 }
 
 header{
-    background:url("https://images.unsplash.com/photo-1552667466-07770ae110d0?w=1200") center/cover;
-    padding:80px 20px;
+    background:linear-gradient(rgba(0,0,0,.6),
+    rgba(0,0,0,.6)),
+    url("https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&w=1400&q=80");
+
+    background-size:cover;
+    background-position:center;
+
     text-align:center;
+    padding:80px 20px;
 }
 
 header h1{
     font-size:48px;
-    margin:0;
+    margin-bottom:10px;
 }
 
-nav{
-    background:#111;
-    padding:15px;
-    text-align:center;
+header h2{
+    color:gold;
 }
 
-nav a{
-    color:white;
-    margin:20px;
-    text-decoration:none;
-    font-weight:bold;
-}
-
-section{
+.container{
+    max-width:1200px;
+    margin:auto;
     padding:20px;
 }
 
 .card{
-    background:#1d5a1d;
+    background:#145214;
+    margin-bottom:20px;
     border-radius:12px;
     padding:20px;
-    margin-bottom:20px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.4);
+}
+
+h2{
+    color:gold;
 }
 
 table{
     width:100%;
     border-collapse:collapse;
-    margin-top:15px;
 }
 
 th{
     background:#222;
 }
 
-th,td{
-    padding:12px;
+th, td{
     border:1px solid #444;
+    padding:12px;
+    text-align:left;
+}
+
+.form{
+    font-size:32px;
 }
 
 .gold{
     color:gold;
+    font-weight:bold;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
+}
+
+.stat-box{
+    background:#1c661c;
+    padding:15px;
+    border-radius:10px;
+    text-align:center;
+}
+
+.stat-box h3{
+    margin:0;
+    font-size:32px;
+    color:gold;
+}
+
+footer{
+    text-align:center;
+    padding:30px;
+    color:#ddd;
 }
 
 </style>
+
 </head>
 
 <body>
 
 <header>
-    <h1>⚽ CURRIE STAR 2017s</h1>
-    <p>Season 2</p>
+
+<h1>⚽ CURRIE STAR 2017s</h1>
+
+<h2>Season 2</h2>
+
+<p>Played 4 | Won 2 | Drawn 1 | Lost 1</p>
+
+<p>Goals For 25 | Goals Against 22 | Goal Difference +3</p>
+
 </header>
 
-<nav>
-    #fixturesFixtures</a>
-    #playersPlayers</a>
-    #statsStats</a>
-    #leadersLeaders</a>
-</nav>
-
-<section>
+<div class="container">
 
 <div class="card">
-<h2>Season Overview</h2>
 
-<p>Games: 12</p>
-<p>Wins: 8</p>
-<p>Draws: 2</p>
-<p>Losses: 2</p>
+<h2>🔥 Current Form</h2>
+
+<div class="form">
+🟢 🟢 🟡 🔴
+</div>
+
+<p>W W D L</p>
 
 </div>
 
-<div id="fixtures" class="card">
+<div class="card">
 
-<h2>Fixtures & Results</h2>
+<h2>📊 Season Statistics</h2>
+
+<div class="stats">
+
+<div class="stat-box">
+<h3>4</h3>
+<p>Games</p>
+</div>
+
+<div class="stat-box">
+<h3>2</h3>
+<p>Wins</p>
+</div>
+
+<div class="stat-box">
+<h3>1</h3>
+<p>Draws</p>
+</div>
+
+<div class="stat-box">
+<h3>1</h3>
+<p>Losses</p>
+</div>
+
+<div class="stat-box">
+<h3>25</h3>
+<p>Goals For</p>
+</div>
+
+<div class="stat-box">
+<h3>22</h3>
+<p>Goals Against</p>
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>📅 Fixtures & Results</h2>
 
 <table>
 
@@ -112,92 +190,111 @@ th,td{
 </tr>
 
 <tr>
-<td>01/09/26</td>
-<td>Spartans</td>
-<td>4-2 W</td>
-<td>Jack</td>
-<td>Jack (2), Sam, Lewis</td>
+<td>16 Aug 2026</td>
+<td>North Merchiston (H)</td>
+<td>6-5 W</td>
+<td>Finn</td>
+<td>Oliver, Luke (2), Freddy, Magnus, Sam</td>
 </tr>
 
 <tr>
-<td>07/09/26</td>
-<td>Tynecastle</td>
-<td>2-1 W</td>
+<td>23 Aug 2026</td>
+<td>Penicuik (A)</td>
+<td>10-8 W</td>
+<td>Oliver</td>
+<td>Finn (3), Freddy (4), Francesco, Luke, Own Goal</td>
+</tr>
+
+<tr>
+<td>30 Aug 2026</td>
+<td>Easter Houses</td>
+<td>4-4 D</td>
 <td>Sam</td>
-<td>Sam, Harry</td>
+<td>Finn, Francesco, Oliver, Sam</td>
+</tr>
+
+<tr>
+<td>06 Sept 2026</td>
+<td>Musselburgh (A)</td>
+<td>5-11 L</td>
+<td>Francesco</td>
+<td>Jamie, Finn, Francesco (2), Brodie</td>
 </tr>
 
 </table>
 
 </div>
 
-<div id="players" class="card">
+<div class="card">
 
-<h2>Squad</h2>
+<h2>🏆 Team Leaders</h2>
+
+<p class="gold">Top Scorers: Finn & Freddy (5)</p>
+
+<p class="gold">Most Captaincies: Finn, Oliver, Sam & Francesco (1)</p>
+
+<p class="gold">Most Appearances: Entire Squad (4)</p>
+
+</div>
+
+<div class="card">
+
+<h2>👥 Squad Statistics</h2>
 
 <table>
 
 <tr>
 <th>Player</th>
-<th>Appearances</th>
+<th>Apps</th>
 <th>Goals</th>
 <th>Captaincies</th>
 </tr>
 
-<tr>
-<td>Jack</td>
-<td>12</td>
-<td>14</td>
-<td>3</td>
-</tr>
-
-<tr>
-<td>Sam</td>
-<td>11</td>
-<td>9</td>
-<td>4</td>
-</tr>
-
-<tr>
-<td>Harry</td>
-<td>10</td>
-<td>5</td>
-<td>0</td>
-</tr>
+<tr><td>Jamie</td><td>4</td><td>1</td><td>0</td></tr>
+<tr><td>Mohammad</td><td>4</td><td>0</td><td>0</td></tr>
+<tr><td>Luke</td><td>4</td><td>3</td><td>0</td></tr>
+<tr><td>Sam</td><td>4</td><td>2</td><td>1</td></tr>
+<tr><td>Freddy</td><td>4</td><td>5</td><td>0</td></tr>
+<tr><td>Magnus</td><td>4</td><td>1</td><td>0</td></tr>
+<tr><td>Francesco</td><td>4</td><td>4</td><td>1</td></tr>
+<tr><td>Thomas</td><td>4</td><td>0</td><td>0</td></tr>
+<tr><td>Finn</td><td>4</td><td>5</td><td>1</td></tr>
+<tr><td>Oliver</td><td>4</td><td>3</td><td>1</td></tr>
+<tr><td>Brodie</td><td>4</td><td>1</td><td>0</td></tr>
 
 </table>
 
 </div>
 
-<div id="stats" class="card">
+<div class="card">
 
-<h2>Season Statistics</h2>
+<h2>🎯 Goal Rankings</h2>
 
-<p>Goals Scored: 42</p>
-<p>Goals Conceded: 17</p>
-<p>Goal Difference: +25</p>
+<table>
 
-</div>
+<tr>
+<th>Rank</th>
+<th>Player</th>
+<th>Goals</th>
+</tr>
 
-<div id="leaders" class="card">
+<tr><td>1</td><td>Finn</td><td>5</td></tr>
+<tr><td>1</td><td>Freddy</td><td>5</td></tr>
+<tr><td>3</td><td>Francesco</td><td>4</td></tr>
+<tr><td>4</td><td>Luke</td><td>3</td></tr>
+<tr><td>4</td><td>Oliver</td><td>3</td></tr>
 
-<h2>🏆 Team Leaders</h2>
-
-<p class="gold">
-Top Scorer: Jack (14)
-</p>
-
-<p class="gold">
-Most Appearances: Jack (12)
-</p>
-
-<p class="gold">
-Most Captaincies: Sam (4)
-</p>
+</table>
 
 </div>
 
-</section>
+</div>
+
+<footer>
+
+Currie Star 2017s • Season 2 ⚽
+
+</footer>
 
 </body>
 </html>
