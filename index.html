@@ -1,106 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Currie Star 2017s - Season 2</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Currie Star 2017s</title>
 
 <style>
 
 body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    background:#0b3d0b;
-    color:white;
+background:#083b08;
+color:white;
+font-family:Arial;
+margin:0;
 }
 
 header{
-    background:linear-gradient(rgba(0,0,0,.6),
-    rgba(0,0,0,.6)),
-    url("https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&w=1400&q=80");
-
-    background-size:cover;
-    background-position:center;
-
-    text-align:center;
-    padding:80px 20px;
+background:#111;
+padding:20px;
+text-align:center;
 }
 
-header h1{
-    font-size:48px;
-    margin-bottom:10px;
-}
-
-header h2{
-    color:gold;
+h1{
+margin:0;
+color:gold;
 }
 
 .container{
-    max-width:1200px;
-    margin:auto;
-    padding:20px;
+padding:15px;
+max-width:1000px;
+margin:auto;
 }
 
 .card{
-    background:#145214;
-    margin-bottom:20px;
-    border-radius:12px;
-    padding:20px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.4);
+background:#145214;
+padding:15px;
+margin:15px 0;
+border-radius:10px;
 }
 
-h2{
-    color:gold;
+input,select{
+width:100%;
+padding:10px;
+margin:5px 0;
+border-radius:8px;
+border:none;
+}
+
+button{
+padding:12px;
+background:gold;
+border:none;
+border-radius:8px;
+font-weight:bold;
+cursor:pointer;
 }
 
 table{
-    width:100%;
-    border-collapse:collapse;
+width:100%;
+border-collapse:collapse;
+}
+
+th,td{
+padding:10px;
+border:1px solid #333;
 }
 
 th{
-    background:#222;
+background:#222;
 }
 
-th, td{
-    border:1px solid #444;
-    padding:12px;
-    text-align:left;
+.player-box{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:5px;
 }
 
 .form{
-    font-size:32px;
-}
-
-.gold{
-    color:gold;
-    font-weight:bold;
-}
-
-.stats{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-    gap:15px;
-}
-
-.stat-box{
-    background:#1c661c;
-    padding:15px;
-    border-radius:10px;
-    text-align:center;
-}
-
-.stat-box h3{
-    margin:0;
-    font-size:32px;
-    color:gold;
-}
-
-footer{
-    text-align:center;
-    padding:30px;
-    color:#ddd;
+font-size:28px;
 }
 
 </style>
@@ -111,13 +89,9 @@ footer{
 
 <header>
 
-<h1>⚽ CURRIE STAR 2017s</h1>
+<h1>⚽ Currie Star 2017s</h1>
 
-<h2>Season 2</h2>
-
-<p>Played 4 | Won 2 | Drawn 1 | Lost 1</p>
-
-<p>Goals For 25 | Goals Against 28 | Goal Difference -3</p>
+<h3>Season 2</h3>
 
 </header>
 
@@ -125,176 +99,351 @@ footer{
 
 <div class="card">
 
-<h2>🔥 Current Form</h2>
+<h2>Add Match</h2>
 
-<div class="form">
-🟢 🟢 🟡 🔴
-</div>
+<input id="date" type="date">
 
-<p>W W D L</p>
+<input id="opponent" placeholder="Opponent">
 
-</div>
+<select id="venue">
+<option>Home</option>
+<option>Away</option>
+</select>
 
-<div class="card">
+<input id="goalsFor" type="number" placeholder="Goals For">
 
-<h2>📊 Season Statistics</h2>
+<input id="goalsAgainst" type="number" placeholder="Goals Against">
 
-<div class="stats">
+<select id="captain"></select>
 
-<div class="stat-box">
-<h3>4</h3>
-<p>Games</p>
-</div>
+<h3>Players Who Played</h3>
 
-<div class="stat-box">
-<h3>2</h3>
-<p>Wins</p>
-</div>
+<div id="playerChecks" class="player-box"></div>
 
-<div class="stat-box">
-<h3>1</h3>
-<p>Draws</p>
-</div>
+<h3>Scorers</h3>
 
-<div class="stat-box">
-<h3>1</h3>
-<p>Losses</p>
-</div>
+<textarea
+id="scorers"
+style="width:100%;height:100px;"
+placeholder="Example:
 
-<div class="stat-box">
-<h3>25</h3>
-<p>Goals For</p>
-</div>
+Finn, Finn, Finn
+Freddy, Freddy
+Luke
+">
+</textarea>
 
-<div class="stat-box">
-<h3>28</h3>
-<p>Goals Against</p>
-</div>
+<br><br>
 
-</div>
+<button onclick="saveMatch()">
+Save Match
+</button>
 
 </div>
 
 <div class="card">
+<h2>📊 Season Summary</h2>
 
-<h2>📅 Fixtures & Results</h2>
-
-<table>
-
-<tr>
-<th>Date</th>
-<th>Opponent</th>
-<th>Result</th>
-<th>Captain</th>
-<th>Scorers</th>
-</tr>
-
-<tr>
-<td>16 Aug 2026</td>
-<td>North Merchiston (H)</td>
-<td>6-5 W</td>
-<td>Finn</td>
-<td>Oliver, Luke (2), Freddy, Magnus, Sam</td>
-</tr>
-
-<tr>
-<td>23 Aug 2026</td>
-<td>Penicuik (A)</td>
-<td>10-8 W</td>
-<td>Oliver</td>
-<td>Finn (3), Freddy (4), Francesco, Luke, Own Goal</td>
-</tr>
-
-<tr>
-<td>30 Aug 2026</td>
-<td>Easter Houses</td>
-<td>4-4 D</td>
-<td>Sam</td>
-<td>Finn, Francesco, Oliver, Sam</td>
-</tr>
-
-<tr>
-<td>06 Sept 2026</td>
-<td>Musselburgh (A)</td>
-<td>5-11 L</td>
-<td>Francesco</td>
-<td>Jamie, Finn, Francesco (2), Brodie</td>
-</tr>
-
-</table>
-
+<div id="summary"></div>
 </div>
 
 <div class="card">
+<h2>🔥 Form Guide</h2>
 
-<h2>🏆 Team Leaders</h2>
-
-<p class="gold">Top Scorers: Finn & Freddy (5)</p>
-
-<p class="gold">Most Captaincies: Finn, Oliver, Sam & Francesco (1)</p>
-
-<p class="gold">Most Appearances: Entire Squad (4)</p>
-
+<div class="form" id="formGuide"></div>
 </div>
 
 <div class="card">
+<h2>🏆 Top Scorers</h2>
 
-<h2>👥 Squad Statistics</h2>
+<div id="topScorers"></div>
+</div>
 
-<table>
+<div class="card">
+<h2>👥 Squad Stats</h2>
 
+<div id="playerStats"></div>
+</div>
+
+<div class="card">
+<h2>📅 Match History</h2>
+
+<div id="matches"></div>
+</div>
+
+</div>
+
+<script>
+
+const players = [
+"Jamie",
+"Mohammad",
+"Luke",
+"Sam",
+"Freddy",
+"Magnus",
+"Francesco",
+"Thomas",
+"Finn",
+"Oliver",
+"Brodie"
+];
+
+let matches =
+JSON.parse(
+localStorage.getItem("currieMatches")
+) || [];
+
+
+function setupPlayers(){
+
+const area =
+document.getElementById("playerChecks");
+
+const captain =
+document.getElementById("captain");
+
+players.forEach(player=>{
+
+captain.innerHTML +=
+`<option>${player}</option>`;
+
+area.innerHTML += `
+<label>
+<input
+type="checkbox"
+value="${player}">
+${player}
+</label>
+`;
+
+});
+
+}
+
+function saveMatch(){
+
+const played=[];
+
+document
+.querySelectorAll(
+"#playerChecks input:checked"
+)
+.forEach(box=>{
+played.push(box.value);
+});
+
+const scorers=
+document
+.getElementById("scorers")
+.value
+.split("\n")
+.filter(x=>x.trim()!="");
+
+matches.push({
+
+date:
+document.getElementById("date").value,
+
+opponent:
+document.getElementById("opponent").value,
+
+venue:
+document.getElementById("venue").value,
+
+goalsFor:
+Number(
+document.getElementById("goalsFor").value
+),
+
+goalsAgainst:
+Number(
+document.getElementById("goalsAgainst").value
+),
+
+captain:
+document.getElementById("captain").value,
+
+players:
+played,
+
+scorers:
+scorers
+
+});
+
+localStorage.setItem(
+"currieMatches",
+JSON.stringify(matches)
+);
+
+render();
+
+alert("⚽ Match Saved");
+
+}
+
+function render(){
+
+let wins=0;
+let draws=0;
+let losses=0;
+
+let goalsFor=0;
+let goalsAgainst=0;
+
+const appearances={};
+const goals={};
+const captaincies={};
+
+players.forEach(player=>{
+appearances[player]=0;
+goals[player]=0;
+captaincies[player]=0;
+});
+
+let form="";
+
+matches.forEach(match=>{
+
+goalsFor+=match.goalsFor;
+goalsAgainst+=match.goalsAgainst;
+
+if(match.goalsFor>match.goalsAgainst){
+wins++;
+form+="🟢 ";
+}
+else if(match.goalsFor==match.goalsAgainst){
+draws++;
+form+="🟡 ";
+}
+else{
+losses++;
+form+="🔴 ";
+}
+
+captaincies[match.captain]++;
+
+match.players.forEach(player=>{
+appearances[player]++;
+});
+
+match.scorers.forEach(player=>{
+if(goals[player]!=undefined){
+goals[player]++;
+}
+});
+
+});
+
+document.getElementById("summary")
+.innerHTML=`
+<p>Games: ${matches.length}</p>
+<p>Wins: ${wins}</p>
+<p>Draws: ${draws}</p>
+<p>Losses: ${losses}</p>
+<p>Goals For: ${goalsFor}</p>
+<p>Goals Against: ${goalsAgainst}</p>
+`;
+
+document.getElementById("formGuide")
+.innerHTML=form;
+
+let scorerHTML="<table>";
+scorerHTML+=`
+<tr>
+<th>Player</th>
+<th>Goals</th>
+</tr>
+`;
+
+Object.entries(goals)
+
+.sort((a,b)=>b[1]-a[1])
+
+.forEach(row=>{
+
+scorerHTML+=`
+<tr>
+<td>${row[0]}</td>
+<td>${row[1]}</td>
+</tr>
+`;
+
+});
+
+scorerHTML+="</table>";
+
+document.getElementById("topScorers")
+.innerHTML=scorerHTML;
+
+let squadHTML="<table>";
+
+squadHTML+=`
 <tr>
 <th>Player</th>
 <th>Apps</th>
 <th>Goals</th>
 <th>Captaincies</th>
 </tr>
+`;
 
-<tr><td>Jamie</td><td>4</td><td>1</td><td>0</td></tr>
-<tr><td>Mohammad</td><td>4</td><td>0</td><td>0</td></tr>
-<tr><td>Luke</td><td>4</td><td>3</td><td>0</td></tr>
-<tr><td>Sam</td><td>4</td><td>2</td><td>1</td></tr>
-<tr><td>Freddy</td><td>4</td><td>5</td><td>0</td></tr>
-<tr><td>Magnus</td><td>4</td><td>1</td><td>0</td></tr>
-<tr><td>Francesco</td><td>4</td><td>4</td><td>1</td></tr>
-<tr><td>Thomas</td><td>4</td><td>0</td><td>0</td></tr>
-<tr><td>Finn</td><td>4</td><td>5</td><td>1</td></tr>
-<tr><td>Oliver</td><td>4</td><td>3</td><td>1</td></tr>
-<tr><td>Brodie</td><td>4</td><td>1</td><td>0</td></tr>
+players.forEach(player=>{
 
-</table>
-
-</div>
-
-<div class="card">
-
-<h2>🎯 Goal Rankings</h2>
-
-<table>
-
+squadHTML+=`
 <tr>
-<th>Rank</th>
-<th>Player</th>
-<th>Goals</th>
+<td>${player}</td>
+<td>${appearances[player]}</td>
+<td>${goals[player]}</td>
+<td>${captaincies[player]}</td>
 </tr>
+`;
 
-<tr><td>1</td><td>Finn</td><td>5</td></tr>
-<tr><td>1</td><td>Freddy</td><td>5</td></tr>
-<tr><td>3</td><td>Francesco</td><td>4</td></tr>
-<tr><td>4</td><td>Luke</td><td>3</td></tr>
-<tr><td>4</td><td>Oliver</td><td>3</td></tr>
+});
 
-</table>
+squadHTML+="</table>";
 
-</div>
+document.getElementById("playerStats")
+.innerHTML=squadHTML;
 
-</div>
+let matchHTML="<table>";
 
-<footer>
+matchHTML+=`
+<tr>
+<th>Date</th>
+<th>Opponent</th>
+<th>Score</th>
+<th>Captain</th>
+</tr>
+`;
 
-Currie Star 2017s • Season 2 ⚽
+matches
+.slice()
+.reverse()
+.forEach(match=>{
 
-</footer>
+matchHTML+=`
+<tr>
+<td>${match.date}</td>
+<td>${match.opponent}</td>
+<td>${match.goalsFor}-${match.goalsAgainst}</td>
+<td>${match.captain}</td>
+</tr>
+`;
+
+});
+
+matchHTML+="</table>";
+
+document.getElementById("matches")
+.innerHTML=matchHTML;
+
+}
+
+setupPlayers();
+render();
+
+</script>
 
 </body>
 </html>
