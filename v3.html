@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Currie Star 2017 Yellows</title>
+
+<style>
+
+*{
+box-sizing:border-box;
+}
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:linear-gradient(
+180deg,
+#0057b8,
+#eaf4ff
+);
+color:#222;
+}
+
+header{
+
+background:
+linear-gradient(
+rgba(0,0,0,.45),
+rgba(0,0,0,.45)
+),
+url("https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=1400&q=80");
+
+background-size:cover;
+background-position:center;
+
+padding:60px 20px;
+text-align:center;
+color:white;
+
+}
+
+header h1{
+margin:0;
+font-size:42px;
+}
+
+header p{
+margin-top:10px;
+font-size:18px;
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:15px;
+}
+
+.card{
+
+background:white;
+border-radius:18px;
+padding:20px;
+margin-bottom:20px;
+
+box-shadow:
+0 8px 24px rgba(
+0,0,0,
+0.15
+);
+
+}
+
+.stats{
+display:grid;
+grid-template-columns:
+repeat(
+auto-fit,
+minmax(120px,1fr)
+);
+
+gap:15px;
+}
+
+.statBox{
+
+background:#0057b8;
+color:white;
+
+padding:15px;
+
+border-radius:12px;
+
+text-align:center;
+}
+
+.statBox h3{
+margin:0;
+font-size:34px;
+}
+
+.formGuide{
+font-size:34px;
+}
+
+.matchCard{
+
+border:1px solid #ddd;
+
+border-radius:12px;
+
+padding:15px;
+
+margin-bottom:15px;
+
+}
+
+button{
+
+border:none;
+
+padding:10px 15px;
+
+border-radius:8px;
+
+cursor:pointer;
+
+font-weight:bold;
+
+margin:2px;
+
+}
+
+.saveBtn{
+background:#ffcc00;
+}
+
+.editBtn{
+background:#2196f3;
+color:white;
+}
+
+.deleteBtn{
+background:#d32f2f;
+color:white;
+}
+
+input,
+select{
+
+width:100%;
+
+padding:12px;
+
+margin-bottom:10px;
+
+border-radius:8px;
+
+border:1px solid #ccc;
+
+}
+
+.goalRow{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:6px 0;
+
+border-bottom:1px solid #eee;
+
+}
+
+.goalButtons{
+
+display:flex;
+
+align-items:center;
+
+gap:10px;
+
+}
+
+.goalBtn{
+
+width:35px;
+height:35px;
+
+padding:0;
+}
+
+.playerGrid{
+
+display:grid;
+
+grid-template-columns:
+repeat(
+2,
+1fr
+);
+
+gap:4px;
+}
+
+table{
+
+width:100%;
+
+border-collapse:collapse;
+
+}
+
+th,td{
+
+padding:10px;
+
+border:1px solid #ddd;
+
+text-align:left;
+
+}
+
+th{
+
+background:#0057b8;
+
+color:white;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>⚽ Currie Star 2017 Yellows</h1>
+
+<p>
+Player Statistics & Match Centre
+</p>
+
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<h2>Season</h2>
+
+<select id="seasonFilter">
+
+<option>
+Season 1
+</option>
+
+<option selected>
+Season 2
+</option>
+
+</select>
+
+</div>
+
+<div class="card">
+
+<h2>
+📊 Season Summary
+</h2>
+
+<div id="summary"></div>
+
+</div>
+
+<div class="card">
+
+<h2>
+🔥 Form Guide
+</h2>
+
+<div
+class="formGuide"
+id="formGuide">
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>
+📅 Match History
+</h2>
+
+<div id="matches"></div>
+
+</div>
+
+<div class="card">
+
+<h2>
+👥 Squad Statistics
+</h2>
+
+<div id="playerStats"></div>
+
+</div>
+
+<div class="card">
+
+<h2>
+⚽ Add / Edit Match
+</h2>
+
+<select id="matchSeason">
+
+<option>
+Season 1
+</option>
+
+<option selected>
+Season 2
+</option>
+
+</select>
+
+<input
+type="date"
+id="date">
+
+<input
+id="opponent"
+placeholder="Opponent">
+
+<select id="venue">
+
+<option>
+Home
+</option>
+
+<option>
+Away
+</option>
+
+</select>
+
+<input
+type="number"
+id="goalsFor"
+placeholder="Goals For">
+
+<input
+type="number"
+id="goalsAgainst"
+placeholder="Goals Against">
+
+<select id="captain"></select>
+
+<h3>
+Players Who Played
+</h3>
+
+<div
+id="playerChecks"
+class="playerGrid">
+</div>
+
+<h3>
+Goalscorers
+</h3>
+
+<div id="goalEditor"></div>
+
+<button
+class="saveBtn"
+onclick="saveMatch()">
+
+💾 Save Match
+
+</button>
+
+</div>
+<script>
+
+const players = [
+"Jamie",
+"Mohammad",
+"Luke",
+"Sam",
+"Freddy",
+"Magnus",
+"Francesco",
+"Thomas",
+"Finn",
+"Oliver",
+"Brodie"
+];
+
+let matches =
+JSON.parse(
+localStorage.getItem(
+"currieMatches"
+)
+) || [];
+
+let editingIndex = -1;
+
+const goalCounts = {};
+
+players.forEach(player=>{
+
+goalCounts[player] = 0;
+
+});
+
+function migrateSeasons(){
+
+let changed = false;
+
+matches.forEach(match=>{
+
+if(!match.season){
+
+match.season =
+"Season 2";
+
+changed = true;
+
+}
+
+});
+
+if(changed){
+
+localStorage.setItem(
+"currieMatches",
+JSON.stringify(matches)
+);
+
+}
+
+}
+
+function setupPlayers(){
+
+const captain =
+document.getElementById(
+"captain"
+);
+
+const playerChecks =
+document.getElementById(
+"playerChecks"
+);
+
+const goalEditor =
+document.getElementById(
+"goalEditor"
+);
+
+players.forEach(player=>{
+
+captain.innerHTML += `
+<option>
+${player}
+</option>
+`;
+
+playerChecks.innerHTML += `
+<label>
+<input
+type="checkbox"
+value="${player}">
+${player}
+</label>
+`;
+
+goalEditor.innerHTML += `
+
+<div class="goalRow">
+
+<div>
+
+${player}
+
+</div>
+
+<div class="goalButtons">
+
+<button
+type="button"
+class="goalBtn"
+onclick="changeGoals(
+'${player}',
+-1
+)">
+-
+</button>
+
+<span
+id="goal_${player}"
+>
+0
+</span>
+
+<button
+type="button"
+class="goalBtn"
+onclick="changeGoals(
+'${player}',
+1
+)">
++
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+function changeGoals(
+player,
+amount
+){
+
+goalCounts[player] += amount;
+
+if(
+goalCounts[player] < 0
+){
+
+goalCounts[player] = 0;
+
+}
+
+document.getElementById(
+"goal_" + player
+).innerHTML = goalCounts[player];
+
+}
+
+function clearForm(){
+
+document.getElementById(
+"date"
+).value = "";
+
+document.getElementById(
+"opponent"
+).value = "";
+
+document.getElementById(
+"goalsFor"
+).value = "";
+
+document.getElementById(
+"goalsAgainst"
+).value = "";
+
+document
+.querySelectorAll(
+"#playerChecks input"
+)
+.forEach(box=>{
+
+box.checked = false;
+
+});
+
+players.forEach(player=>{
+
+goalCounts[player] = 0;
+
+document.getElementById(
+"goal_" + player
+).innerHTML = 0;
+
+});
+
+editingIndex = -1;
+
+}
+
+function saveMatch(){
+
+const played = [];
+
+document
+.querySelectorAll(
+"#playerChecks input:checked"
+)
+.forEach(box=>{
+
+played.push(
+box.value
+);
+
+});
+
+const scorers = [];
+
+players.forEach(player=>{
+
+for(
+let i = 0;
+i < goalCounts[player];
+i++
+){
+
+scorers.push(
+player
+);
+
+}
+
+});
+
+const matchData = {
+
+season:
+document.getElementById(
+"matchSeason"
+).value,
+
+date:
+document.getElementById(
+"date"
+).value,
+
+opponent:
+document.getElementById(
+"opponent"
+).value,
+
+venue:
+document.getElementById(
+"venue"
+).value,
+
+goalsFor:
+Number(
+document.getElementById(
+"goalsFor"
+).value
+),
+
+goalsAgainst:
+Number(
+document.getElementById(
+"goalsAgainst"
+).value
+),
+
+captain:
+document.getElementById(
+"captain"
+).value,
+
+players:
+played,
+
+scorers:
+scorers
+
+};
+
+if(
+editingIndex >= 0
+){
+
+matches[
+editingIndex
+] = matchData;
+
+alert(
+"✅ Match Updated"
+);
+
+}else{
+
+matches.push(
+matchData
+);
+
+alert(
+"⚽ Match Saved"
+);
+
+}
+
+localStorage.setItem(
+"currieMatches",
+JSON.stringify(matches)
+);
+
+clearForm();
+
+render();
+
+}
+
+function editMatch(index){
+
+const match =
+matches[index];
+
+editingIndex =
+index;
+
+document.getElementById(
+"matchSeason"
+).value =
+match.season;
+
+document.getElementById(
+"date"
+).value =
+match.date;
+
+document.getElementById(
+"opponent"
+).value =
+match.opponent;
+
+document.getElementById(
+"venue"
+).value =
+match.venue;
+
+document.getElementById(
+"goalsFor"
+).value =
+match.goalsFor;
+
+document.getElementById(
+"goalsAgainst"
+).value =
+match.goalsAgainst;
+
+document.getElementById(
+"captain"
+).value =
+match.captain;
+
+document
+.querySelectorAll(
+"#playerChecks input"
+)
+.forEach(box=>{
+
+box.checked =
+match.players.includes(
+box.value
+);
+
+});
+
+players.forEach(player=>{
+
+goalCounts[player] = 0;
+
+});
+
+match.scorers.forEach(player=>{
+
+if(
+goalCounts[player]
+!== undefined
+){
+
+goalCounts[player]++;
+
+}
+
+});
+
+players.forEach(player=>{
+
+document.getElementById(
+"goal_" + player
+).innerHTML =
+goalCounts[player];
+
+});
+
+window.scrollTo({
+
+top:
+document.body.scrollHeight,
+
+behavior:
+"smooth"
+
+});
+
+}
+
+function deleteMatch(index){
+
+if(
+!confirm(
+"Delete this match?"
+)
+){
+return;
+}
+
+matches.splice(
+index,
+1
+);
+
+localStorage.setItem(
+"currieMatches",
+JSON.stringify(matches)
+);
+
+render();
+
+}
+function render(){
+
+const season =
+document.getElementById(
+"seasonFilter"
+).value;
+
+const seasonMatches =
+matches.filter(match =>
+match.season === season
+);
+
+let wins = 0;
+let draws = 0;
+let losses = 0;
+
+let goalsFor = 0;
+let goalsAgainst = 0;
+
+let form = "";
+
+const appearances = {};
+const goals = {};
+const captaincies = {};
+
+players.forEach(player=>{
+
+appearances[player] = 0;
+goals[player] = 0;
+captaincies[player] = 0;
+
+});
+
+seasonMatches.forEach(match=>{
+
+goalsFor += match.goalsFor;
+goalsAgainst += match.goalsAgainst;
+
+if(match.goalsFor >
+match.goalsAgainst){
+
+wins++;
+form += "🟢 ";
+
+}
+else if(
+match.goalsFor ===
+match.goalsAgainst
+){
+
+draws++;
+form += "🟡 ";
+
+}
+else{
+
+losses++;
+form += "🔴 ";
+
+}
+
+captaincies[
+match.captain
+]++;
+
+match.players.forEach(player=>{
+
+appearances[player]++;
+
+});
+
+match.scorers.forEach(player=>{
+
+if(
+goals[player]
+!== undefined
+){
+
+goals[player]++;
+
+}
+
+});
+
+});
+
+document.getElementById(
+"summary"
+).innerHTML = `
+
+<div class="stats">
+
+<div class="statBox">
+<h3>${seasonMatches.length}</h3>
+<div>Games</div>
+</div>
+
+<div class="statBox">
+<h3>${wins}</h3>
+<div>Wins</div>
+</div>
+
+<div class="statBox">
+<h3>${draws}</h3>
+<div>Draws</div>
+</div>
+
+<div class="statBox">
+<h3>${losses}</h3>
+<div>Losses</div>
+</div>
+
+<div class="statBox">
+<h3>${goalsFor}</h3>
+<div>Goals For</div>
+</div>
+
+<div class="statBox">
+<h3>${goalsAgainst}</h3>
+<div>Goals Against</div>
+</div>
+
+</div>
+
+`;
+
+document.getElementById(
+"formGuide"
+).innerHTML =
+form || "No Matches";
+
+let matchHTML = "";
+
+seasonMatches
+.slice()
+.reverse()
+.forEach((match,index)=>{
+
+const actualIndex =
+matches.indexOf(match);
+
+const scorerSummary = {};
+
+match.scorers.forEach(player=>{
+
+if(
+!scorerSummary[player]
+){
+
+scorerSummary[player] = 0;
+
+}
+
+scorerSummary[player]++;
+
+});
+
+const scorerText =
+Object.entries(
+scorerSummary
+)
+.map(row => {
+
+if(row[1] === 1){
+
+return row[0];
+
+}
+
+return row[0] +
+" x" +
+row[1];
+
+})
+.join(", ");
+
+matchHTML += `
+
+<div class="matchCard">
+
+<h3>
+${match.opponent}
+(${match.venue})
+</h3>
+
+<p>
+
+<strong>Date:</strong>
+${match.date}
+
+</p>
+
+<p>
+
+<strong>Result:</strong>
+
+${match.goalsFor}
+-
+${match.goalsAgainst}
+
+</p>
+
+<p>
+
+<strong>Captain:</strong>
+
+${match.captain}
+
+</p>
+
+<p>
+
+<strong>Scorers:</strong>
+
+${scorerText ||
+"None"}
+
+</p>
+
+<button
+class="editBtn"
+onclick="
+editMatch(
+${actualIndex}
+)
+">
+
+Edit
+
+</button>
+
+<button
+class="deleteBtn"
+onclick="
+deleteMatch(
+${actualIndex}
+)
+">
+
+Delete
+
+</button>
+
+</div>
+
+`;
+
+});
+
+document.getElementById(
+"matches"
+).innerHTML =
+matchHTML ||
+"<p>No matches recorded.</p>";
+
+let squadHTML = `
+
+<table>
+
+<tr>
+
+<th>Player</th>
+
+<th>Apps</th>
+
+<th>Goals</th>
+
+<th>Captaincies</th>
+
+</tr>
+
+`;
+
+players.forEach(player=>{
+
+squadHTML += `
+
+<tr>
+
+<td>
+
+${player}
+
+</td>
+
+<td>
+
+${appearances[player]}
+
+</td>
+
+<td>
+
+${goals[player]}
+
+</td>
+
+<td>
+
+${captaincies[player]}
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+squadHTML +=
+"</table>";
+
+document.getElementById(
+"playerStats"
+).innerHTML =
+squadHTML;
+
+}
+
+document
+.getElementById(
+"seasonFilter"
+)
+.addEventListener(
+"change",
+function(){
+
+render();
+
+}
+);
+
+migrateSeasons();
+
+setupPlayers();
+
+render();
+
+</script>
+
+</body>
+</html>
