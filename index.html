@@ -1,66 +1,140 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Currie Star 2017s</title>
+<title>Currie Star 2017 Yellows</title>
 
 <style>
 
-body{
-background:#083b08;
-color:white;
-font-family:Arial;
-margin:0;
-}
-
-header{
-background:#111;
-padding:20px;
-text-align:center;
-}
-
-h1{
-margin:0;
-color:gold;
-}
-
-.container{
-padding:15px;
-max-width:1000px;
-margin:auto;
-}
-
-.card{
-background:#145214;
-padding:15px;
-margin:15px 0;
-border-radius:10px;
-}
-
-input,select,textarea{
-width:100%;
-padding:10px;
-margin:5px 0;
-border-radius:8px;
-border:none;
+*{
 box-sizing:border-box;
 }
 
-button{
-padding:10px;
-background:gold;
-border:none;
-border-radius:8px;
-font-weight:bold;
-cursor:pointer;
-margin:2px;
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:linear-gradient(
+180deg,
+#0057b8,
+#eaf4ff
+);
+color:#222;
 }
 
-.deleteBtn{
-background:red;
+header{
+
+background:
+linear-gradient(
+rgba(0,0,0,.45),
+rgba(0,0,0,.45)
+),
+url("https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=1400&q=80");
+
+background-size:cover;
+background-position:center;
+
+padding:60px 20px;
+text-align:center;
 color:white;
+
+}
+
+header h1{
+margin:0;
+font-size:42px;
+}
+
+header p{
+margin-top:10px;
+font-size:18px;
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:15px;
+}
+
+.card{
+
+background:white;
+border-radius:18px;
+padding:20px;
+margin-bottom:20px;
+
+box-shadow:
+0 8px 24px rgba(
+0,0,0,
+0.15
+);
+
+}
+
+.stats{
+display:grid;
+grid-template-columns:
+repeat(
+auto-fit,
+minmax(120px,1fr)
+);
+
+gap:15px;
+}
+
+.statBox{
+
+background:#0057b8;
+color:white;
+
+padding:15px;
+
+border-radius:12px;
+
+text-align:center;
+}
+
+.statBox h3{
+margin:0;
+font-size:34px;
+}
+
+.formGuide{
+font-size:34px;
+}
+
+.matchCard{
+
+border:1px solid #ddd;
+
+border-radius:12px;
+
+padding:15px;
+
+margin-bottom:15px;
+
+}
+
+button{
+
+border:none;
+
+padding:10px 15px;
+
+border-radius:8px;
+
+cursor:pointer;
+
+font-weight:bold;
+
+margin:2px;
+
+}
+
+.saveBtn{
+background:#ffcc00;
 }
 
 .editBtn{
@@ -68,28 +142,95 @@ background:#2196f3;
 color:white;
 }
 
-table{
+.deleteBtn{
+background:#d32f2f;
+color:white;
+}
+
+input,
+select{
+
 width:100%;
+
+padding:12px;
+
+margin-bottom:10px;
+
+border-radius:8px;
+
+border:1px solid #ccc;
+
+}
+
+.goalRow{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:6px 0;
+
+border-bottom:1px solid #eee;
+
+}
+
+.goalButtons{
+
+display:flex;
+
+align-items:center;
+
+gap:10px;
+
+}
+
+.goalBtn{
+
+width:35px;
+height:35px;
+
+padding:0;
+}
+
+.playerGrid{
+
+display:grid;
+
+grid-template-columns:
+repeat(
+2,
+1fr
+);
+
+gap:4px;
+}
+
+table{
+
+width:100%;
+
 border-collapse:collapse;
+
 }
 
 th,td{
+
 padding:10px;
-border:1px solid #333;
+
+border:1px solid #ddd;
+
+text-align:left;
+
 }
 
 th{
-background:#222;
-}
 
-.player-box{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:5px;
-}
+background:#0057b8;
 
-.form{
-font-size:28px;
+color:white;
+
 }
 
 </style>
@@ -99,85 +240,152 @@ font-size:28px;
 <body>
 
 <header>
-<h1>⚽ Currie Star 2017s</h1>
-<h3>Season 2</h3>
+
+<h1>⚽ Currie Star 2017 Yellows</h1>
+
+<p>
+Player Statistics & Match Centre
+</p>
+
 </header>
 
 <div class="container">
 
 <div class="card">
 
-<h2>Add / Edit Match</h2>
+<h2>Season</h2>
 
-<input id="date" type="date">
+<select id="seasonFilter">
 
-<input id="opponent" placeholder="Opponent">
+<option>
+Season 1
+</option>
 
-<select id="venue">
-<option>Home</option>
-<option>Away</option>
+<option selected>
+Season 2
+</option>
+
 </select>
 
-<input id="goalsFor" type="number" placeholder="Goals For">
+</div>
 
-<input id="goalsAgainst" type="number" placeholder="Goals Against">
+<div class="card">
+
+<h2>
+📊 Season Summary
+</h2>
+
+<div id="summary"></div>
+
+</div>
+
+<div class="card">
+
+<h2>
+🔥 Form Guide
+</h2>
+
+<div
+class="formGuide"
+id="formGuide">
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>
+📅 Match History
+</h2>
+
+<div id="matches"></div>
+
+</div>
+
+<div class="card">
+
+<h2>
+👥 Squad Statistics
+</h2>
+
+<div id="playerStats"></div>
+
+</div>
+
+<div class="card">
+
+<h2>
+⚽ Add / Edit Match
+</h2>
+
+<select id="matchSeason">
+
+<option>
+Season 1
+</option>
+
+<option selected>
+Season 2
+</option>
+
+</select>
+
+<input
+type="date"
+id="date">
+
+<input
+id="opponent"
+placeholder="Opponent">
+
+<select id="venue">
+
+<option>
+Home
+</option>
+
+<option>
+Away
+</option>
+
+</select>
+
+<input
+type="number"
+id="goalsFor"
+placeholder="Goals For">
+
+<input
+type="number"
+id="goalsAgainst"
+placeholder="Goals Against">
 
 <select id="captain"></select>
 
-<h3>Players Who Played</h3>
+<h3>
+Players Who Played
+</h3>
 
-<div id="playerChecks" class="player-box"></div>
+<div
+id="playerChecks"
+class="playerGrid">
+</div>
 
-<h3>Scorers</h3>
+<h3>
+Goalscorers
+</h3>
 
-<textarea
-id="scorers"
-rows="6"
-placeholder="One scorer per line
+<div id="goalEditor"></div>
 
-Example
+<button
+class="saveBtn"
+onclick="saveMatch()">
 
-Finn
-Finn
-Finn
-Freddy
-Luke"></textarea>
-
-<br>
-
-<button onclick="saveMatch()">
 💾 Save Match
+
 </button>
 
 </div>
-
-<div class="card">
-<h2>📊 Season Summary</h2>
-<div id="summary"></div>
-</div>
-
-<div class="card">
-<h2>🔥 Form Guide</h2>
-<div class="form" id="formGuide"></div>
-</div>
-
-<div class="card">
-<h2>🏆 Top Scorers</h2>
-<div id="topScorers"></div>
-</div>
-
-<div class="card">
-<h2>👥 Squad Statistics</h2>
-<div id="playerStats"></div>
-</div>
-
-<div class="card">
-<h2>📅 Match History</h2>
-<div id="matches"></div>
-</div>
-
-</div>
-
 <script>
 
 const players = [
@@ -196,25 +404,75 @@ const players = [
 
 let matches =
 JSON.parse(
-localStorage.getItem("currieMatches")
+localStorage.getItem(
+"currieMatches"
+)
 ) || [];
 
 let editingIndex = -1;
 
-function setupPlayers(){
-
-const area =
-document.getElementById("playerChecks");
-
-const captain =
-document.getElementById("captain");
+const goalCounts = {};
 
 players.forEach(player=>{
 
-captain.innerHTML +=
-`<option>${player}</option>`;
+goalCounts[player] = 0;
 
-area.innerHTML += `
+});
+
+function migrateSeasons(){
+
+let changed = false;
+
+matches.forEach(match=>{
+
+if(!match.season){
+
+match.season =
+"Season 2";
+
+changed = true;
+
+}
+
+});
+
+if(changed){
+
+localStorage.setItem(
+"currieMatches",
+JSON.stringify(matches)
+);
+
+}
+
+}
+
+function setupPlayers(){
+
+const captain =
+document.getElementById(
+"captain"
+);
+
+const playerChecks =
+document.getElementById(
+"playerChecks"
+);
+
+const goalEditor =
+document.getElementById(
+"goalEditor"
+);
+
+players.forEach(player=>{
+
+captain.innerHTML += `
+<option>
+${player}
+</option>
+`;
+
+playerChecks.innerHTML += `
 <label>
 <input
 type="checkbox"
@@ -223,21 +481,112 @@ ${player}
 </label>
 `;
 
+goalEditor.innerHTML += `
+
+<div class="goalRow">
+
+<div>
+
+${player}
+
+</div>
+
+<div class="goalButtons">
+
+<button
+type="button"
+class="goalBtn"
+onclick="changeGoals(
+'${player}',
+-1
+)">
+-
+</button>
+
+<span
+id="goal_${player}"
+>
+0
+</span>
+
+<button
+type="button"
+class="goalBtn"
+onclick="changeGoals(
+'${player}',
+1
+)">
++
+</button>
+
+</div>
+
+</div>
+
+`;
+
 });
+
+}
+
+function changeGoals(
+player,
+amount
+){
+
+goalCounts[player] += amount;
+
+if(
+goalCounts[player] < 0
+){
+
+goalCounts[player] = 0;
+
+}
+
+document.getElementById(
+"goal_" + player
+).innerHTML = goalCounts[player];
 
 }
 
 function clearForm(){
 
-document.getElementById("date").value="";
-document.getElementById("opponent").value="";
-document.getElementById("goalsFor").value="";
-document.getElementById("goalsAgainst").value="";
-document.getElementById("scorers").value="";
+document.getElementById(
+"date"
+).value = "";
+
+document.getElementById(
+"opponent"
+).value = "";
+
+document.getElementById(
+"goalsFor"
+).value = "";
+
+document.getElementById(
+"goalsAgainst"
+).value = "";
 
 document
-.querySelectorAll("#playerChecks input")
-.forEach(box=>box.checked=false);
+.querySelectorAll(
+"#playerChecks input"
+)
+.forEach(box=>{
+
+box.checked = false;
+
+});
+
+players.forEach(player=>{
+
+goalCounts[player] = 0;
+
+document.getElementById(
+"goal_" + player
+).innerHTML = 0;
+
+});
 
 editingIndex = -1;
 
@@ -245,47 +594,78 @@ editingIndex = -1;
 
 function saveMatch(){
 
-const played=[];
+const played = [];
 
 document
 .querySelectorAll(
 "#playerChecks input:checked"
 )
 .forEach(box=>{
-played.push(box.value);
+
+played.push(
+box.value
+);
+
 });
 
-const scorers=
-document
-.getElementById("scorers")
-.value
-.split("\n")
-.map(x=>x.trim())
-.filter(x=>x!="");
+const scorers = [];
+
+players.forEach(player=>{
+
+for(
+let i = 0;
+i < goalCounts[player];
+i++
+){
+
+scorers.push(
+player
+);
+
+}
+
+});
 
 const matchData = {
 
+season:
+document.getElementById(
+"matchSeason"
+).value,
+
 date:
-document.getElementById("date").value,
+document.getElementById(
+"date"
+).value,
 
 opponent:
-document.getElementById("opponent").value,
+document.getElementById(
+"opponent"
+).value,
 
 venue:
-document.getElementById("venue").value,
+document.getElementById(
+"venue"
+).value,
 
 goalsFor:
 Number(
-document.getElementById("goalsFor").value
+document.getElementById(
+"goalsFor"
+).value
 ),
 
 goalsAgainst:
 Number(
-document.getElementById("goalsAgainst").value
+document.getElementById(
+"goalsAgainst"
+).value
 ),
 
 captain:
-document.getElementById("captain").value,
+document.getElementById(
+"captain"
+).value,
 
 players:
 played,
@@ -295,17 +675,27 @@ scorers
 
 };
 
-if(editingIndex >= 0){
+if(
+editingIndex >= 0
+){
 
-matches[editingIndex] = matchData;
+matches[
+editingIndex
+] = matchData;
 
-alert("✅ Match Updated");
+alert(
+"✅ Match Updated"
+);
 
 }else{
 
-matches.push(matchData);
+matches.push(
+matchData
+);
 
-alert("⚽ Match Saved");
+alert(
+"⚽ Match Saved"
+);
 
 }
 
@@ -322,56 +712,114 @@ render();
 
 function editMatch(index){
 
-const match = matches[index];
+const match =
+matches[index];
 
-editingIndex = index;
+editingIndex =
+index;
 
-document.getElementById("date").value =
+document.getElementById(
+"matchSeason"
+).value =
+match.season;
+
+document.getElementById(
+"date"
+).value =
 match.date;
 
-document.getElementById("opponent").value =
+document.getElementById(
+"opponent"
+).value =
 match.opponent;
 
-document.getElementById("venue").value =
+document.getElementById(
+"venue"
+).value =
 match.venue;
 
-document.getElementById("goalsFor").value =
+document.getElementById(
+"goalsFor"
+).value =
 match.goalsFor;
 
-document.getElementById("goalsAgainst").value =
+document.getElementById(
+"goalsAgainst"
+).value =
 match.goalsAgainst;
 
-document.getElementById("captain").value =
+document.getElementById(
+"captain"
+).value =
 match.captain;
 
-document.getElementById("scorers").value =
-match.scorers.join("\n");
-
 document
-.querySelectorAll("#playerChecks input")
+.querySelectorAll(
+"#playerChecks input"
+)
 .forEach(box=>{
 
 box.checked =
-match.players.includes(box.value);
+match.players.includes(
+box.value
+);
+
+});
+
+players.forEach(player=>{
+
+goalCounts[player] = 0;
+
+});
+
+match.scorers.forEach(player=>{
+
+if(
+goalCounts[player]
+!== undefined
+){
+
+goalCounts[player]++;
+
+}
+
+});
+
+players.forEach(player=>{
+
+document.getElementById(
+"goal_" + player
+).innerHTML =
+goalCounts[player];
 
 });
 
 window.scrollTo({
-top:0,
-behavior:"smooth"
+
+top:
+document.body.scrollHeight,
+
+behavior:
+"smooth"
+
 });
 
 }
 
 function deleteMatch(index){
 
-if(!confirm(
+if(
+!confirm(
 "Delete this match?"
-)){
+)
+){
 return;
 }
 
-matches.splice(index,1);
+matches.splice(
+index,
+1
+);
 
 localStorage.setItem(
 "currieMatches",
@@ -381,42 +829,55 @@ JSON.stringify(matches)
 render();
 
 }
-
 function render(){
 
-let wins=0;
-let draws=0;
-let losses=0;
+const season =
+document.getElementById(
+"seasonFilter"
+).value;
 
-let goalsFor=0;
-let goalsAgainst=0;
+const seasonMatches =
+matches.filter(match =>
+match.season === season
+);
 
-const appearances={};
-const goals={};
-const captaincies={};
+let wins = 0;
+let draws = 0;
+let losses = 0;
+
+let goalsFor = 0;
+let goalsAgainst = 0;
+
+let form = "";
+
+const appearances = {};
+const goals = {};
+const captaincies = {};
 
 players.forEach(player=>{
 
-appearances[player]=0;
-goals[player]=0;
-captaincies[player]=0;
+appearances[player] = 0;
+goals[player] = 0;
+captaincies[player] = 0;
 
 });
 
-let form="";
-
-matches.forEach(match=>{
+seasonMatches.forEach(match=>{
 
 goalsFor += match.goalsFor;
 goalsAgainst += match.goalsAgainst;
 
-if(match.goalsFor > match.goalsAgainst){
+if(match.goalsFor >
+match.goalsAgainst){
 
 wins++;
 form += "🟢 ";
 
 }
-else if(match.goalsFor === match.goalsAgainst){
+else if(
+match.goalsFor ===
+match.goalsAgainst
+){
 
 draws++;
 form += "🟡 ";
@@ -429,7 +890,9 @@ form += "🔴 ";
 
 }
 
-captaincies[match.captain]++;
+captaincies[
+match.captain
+]++;
 
 match.players.forEach(player=>{
 
@@ -439,7 +902,10 @@ appearances[player]++;
 
 match.scorers.forEach(player=>{
 
-if(goals[player] !== undefined){
+if(
+goals[player]
+!== undefined
+){
 
 goals[player]++;
 
@@ -452,106 +918,253 @@ goals[player]++;
 document.getElementById(
 "summary"
 ).innerHTML = `
-<p>Games: ${matches.length}</p>
-<p>Wins: ${wins}</p>
-<p>Draws: ${draws}</p>
-<p>Losses: ${losses}</p>
-<p>Goals For: ${goalsFor}</p>
-<p>Goals Against: ${goalsAgainst}</p>
+
+<div class="stats">
+
+<div class="statBox">
+<h3>${seasonMatches.length}</h3>
+<div>Games</div>
+</div>
+
+<div class="statBox">
+<h3>${wins}</h3>
+<div>Wins</div>
+</div>
+
+<div class="statBox">
+<h3>${draws}</h3>
+<div>Draws</div>
+</div>
+
+<div class="statBox">
+<h3>${losses}</h3>
+<div>Losses</div>
+</div>
+
+<div class="statBox">
+<h3>${goalsFor}</h3>
+<div>Goals For</div>
+</div>
+
+<div class="statBox">
+<h3>${goalsAgainst}</h3>
+<div>Goals Against</div>
+</div>
+
+</div>
+
 `;
 
 document.getElementById(
 "formGuide"
-).innerHTML = form;
+).innerHTML =
+form || "No Matches";
 
-let scorerHTML =
-"<table><tr><th>Player</th><th>Goals</th></tr>";
+let matchHTML = "";
 
-Object.entries(goals)
-.sort((a,b)=>b[1]-a[1])
-.forEach(row=>{
-
-scorerHTML += `
-<tr>
-<td>${row[0]}</td>
-<td>${row[1]}</td>
-</tr>
-`;
-
-});
-
-scorerHTML += "</table>";
-
-document.getElementById(
-"topScorers"
-).innerHTML = scorerHTML;
-
-let squadHTML =
-"<table><tr><th>Player</th><th>Apps</th><th>Goals</th><th>Captaincies</th></tr>";
-
-players.forEach(player=>{
-
-squadHTML += `
-<tr>
-<td>${player}</td>
-<td>${appearances[player]}</td>
-<td>${goals[player]}</td>
-<td>${captaincies[player]}</td>
-</tr>
-`;
-
-});
-
-squadHTML += "</table>";
-
-document.getElementById(
-"playerStats"
-).innerHTML = squadHTML;
-
-let matchHTML =
-"<table><tr><th>Date</th><th>Opponent</th><th>Score</th><th>Captain</th><th>Actions</th></tr>";
-
-matches
+seasonMatches
 .slice()
 .reverse()
-.forEach((match,reversedIndex)=>{
+.forEach((match,index)=>{
 
 const actualIndex =
-matches.length - 1 - reversedIndex;
+matches.indexOf(match);
+
+const scorerSummary = {};
+
+match.scorers.forEach(player=>{
+
+if(
+!scorerSummary[player]
+){
+
+scorerSummary[player] = 0;
+
+}
+
+scorerSummary[player]++;
+
+});
+
+const scorerText =
+Object.entries(
+scorerSummary
+)
+.map(row => {
+
+if(row[1] === 1){
+
+return row[0];
+
+}
+
+return row[0] +
+" x" +
+row[1];
+
+})
+.join(", ");
 
 matchHTML += `
-<tr>
-<td>${match.date}</td>
-<td>${match.opponent}</td>
-<td>${match.goalsFor}-${match.goalsAgainst}</td>
-<td>${match.captain}</td>
-<td>
+
+<div class="matchCard">
+
+<h3>
+${match.opponent}
+(${match.venue})
+</h3>
+
+<p>
+
+<strong>Date:</strong>
+${match.date}
+
+</p>
+
+<p>
+
+<strong>Result:</strong>
+
+${match.goalsFor}
+-
+${match.goalsAgainst}
+
+</p>
+
+<p>
+
+<strong>Captain:</strong>
+
+${match.captain}
+
+</p>
+
+<p>
+
+<strong>Scorers:</strong>
+
+${scorerText ||
+"None"}
+
+</p>
+
 <button
 class="editBtn"
-onclick="editMatch(${actualIndex})">
+onclick="
+editMatch(
+${actualIndex}
+)
+">
+
 Edit
+
 </button>
 
 <button
 class="deleteBtn"
-onclick="deleteMatch(${actualIndex})">
+onclick="
+deleteMatch(
+${actualIndex}
+)
+">
+
 Delete
+
 </button>
-</td>
-</tr>
+
+</div>
+
 `;
 
 });
 
-matchHTML += "</table>";
-
 document.getElementById(
 "matches"
-).innerHTML = matchHTML;
+).innerHTML =
+matchHTML ||
+"<p>No matches recorded.</p>";
+
+let squadHTML = `
+
+<table>
+
+<tr>
+
+<th>Player</th>
+
+<th>Apps</th>
+
+<th>Goals</th>
+
+<th>Captaincies</th>
+
+</tr>
+
+`;
+
+players.forEach(player=>{
+
+squadHTML += `
+
+<tr>
+
+<td>
+
+${player}
+
+</td>
+
+<td>
+
+${appearances[player]}
+
+</td>
+
+<td>
+
+${goals[player]}
+
+</td>
+
+<td>
+
+${captaincies[player]}
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+squadHTML +=
+"</table>";
+
+document.getElementById(
+"playerStats"
+).innerHTML =
+squadHTML;
 
 }
 
+document
+.getElementById(
+"seasonFilter"
+)
+.addEventListener(
+"change",
+function(){
+
+render();
+
+}
+);
+
+migrateSeasons();
+
 setupPlayers();
+
 render();
 
 </script>
